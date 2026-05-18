@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demo Submission Form</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f0f0f;
+      font-family: 'Courier New', monospace;
+      color: #e0e0e0;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 8px;
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #a0a0a0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #2e2e2e;
+      padding-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #606060;
+      margin-bottom: 0.4rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      background: #111;
+      border: 1px solid #2e2e2e;
+      border-radius: 4px;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      padding: 0.65rem 0.85rem;
+      margin-bottom: 1.4rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #4a9eff;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #4a9eff;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background: #72b4ff;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #4caf50;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Contact Submission</h1>
+    <form id="demo-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="+91 9999999999" required />
+
+      <button type="submit" id="submit-btn">Submit</button>
+    </form>
+    <div id="result">✓ Form submitted successfully.</div>
+  </div>
+
+  <script>
+    document.getElementById('demo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('submit-btn').textContent = 'Submitting...';
+      setTimeout(() => {
+        document.getElementById('demo-form').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+      }, 600);
+    });
+  </script>
+</body>
+</html>

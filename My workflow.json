@@ -1,0 +1,188 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1u0lRwYo3mI8M4BlGuJgf0sGHHnm20pMGHvBD7vqhmf8",
+          "mode": "list",
+          "cachedResultName": "n8n_automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1u0lRwYo3mI8M4BlGuJgf0sGHHnm20pMGHvBD7vqhmf8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1u0lRwYo3mI8M4BlGuJgf0sGHHnm20pMGHvBD7vqhmf8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.Name }}",
+            "email": "={{ $json.Email }}",
+            "phone": "={{ $json.Phone }}",
+            "status": "pending",
+            "log": "Webhook received"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "log",
+              "displayName": "log",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        0
+      ],
+      "id": "7a7e27da-c4e4-4065-b927-9c84c60fe41f",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "foZcrVCqpyetAykg",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://rogue-vantage-scored.ngrok-free.dev/webhook",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.email }}\",\n  \"name\": \"{{ $json.name }}\",\n  \"phone\": \"{{ $json.phone }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        608,
+        0
+      ],
+      "id": "6b5497ab-187b-4935-b4f4-5fc2089bc2e8",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "formTitle": "Details",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Enter Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Enter Email"
+            },
+            {
+              "fieldLabel": "Phone",
+              "fieldType": "number",
+              "placeholder": "Enter Phone"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "036ba2ee-3f49-420e-a45f-edcdc2d76e9f",
+      "name": "On form submission",
+      "webhookId": "493cdb0c-62b7-4765-802e-6c5386b1e95b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "02d087f4-08bb-40d4-b394-53abc66a6c4f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e785ef99485c4cb26186df9c6d7b7bba66d1954fa1060b519f8b574d893e26d7"
+  },
+  "id": "X3lcSxdIiHh0qOiH",
+  "tags": []
+}

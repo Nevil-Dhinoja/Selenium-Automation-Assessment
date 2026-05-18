@@ -1,0 +1,35 @@
+# Google credentials 
+credentials.json
+
+# Python
+venv/
+
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+
+__pycache__/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ngrok
+ngrok.exe
+ngrok
+ngrok.yml
+pyrefly.toml
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
